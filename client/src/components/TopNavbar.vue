@@ -1,8 +1,8 @@
 <template>
   <div id="navbarBase">
     <RouterLink to="/">Welcome</RouterLink>
-    <RouterLink to="/ml">ML</RouterLink>
-    <RouterLink to="/other">Other Projects</RouterLink>
+    <RouterLink to="/od">Object Detector</RouterLink>
+    <RouterLink to="/projects">Other Projects</RouterLink>
     <RouterLink id="login" to="/login">Login</RouterLink>
   </div>
 </template>
