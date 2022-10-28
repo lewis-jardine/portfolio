@@ -14,6 +14,7 @@ import TopNavbar from "./components/UI/TopNavbar.vue";
 <style>
 main {
   margin-top: 4rem;
+  background-image: linear-gradient(to right, #8d0780e6, #f09819);
 }
 .flex-column-centered {
   display: flex;

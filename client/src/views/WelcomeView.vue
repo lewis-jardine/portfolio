@@ -35,7 +35,6 @@
 <style scoped>
 #welcome-content {
   height: calc(100vh - 4rem);
-  background-image: linear-gradient(to right, #8d0780e6, #f09819);
 }
 #welcome-message {
   top: 30%;
