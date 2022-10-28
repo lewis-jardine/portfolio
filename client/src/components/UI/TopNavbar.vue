@@ -3,7 +3,10 @@
     <RouterLink to="/">Welcome</RouterLink>
     <RouterLink to="/od">Object Detector</RouterLink>
     <RouterLink to="/projects">Other Projects</RouterLink>
-    <RouterLink id="login" to="/login">Login</RouterLink>
+    <div id="login">
+      <v-avatar color="secondary" size="44">LJ</v-avatar>
+      <RouterLink to="/login">Login</RouterLink>
+    </div>
   </div>
 </template>
 
@@ -12,11 +15,12 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: black;
   display: flex;
+  background-image: linear-gradient(to right, #8d0780e6, #f09819);
   justify-content: center;
   align-items: center;
   height: 4rem;
+  z-index: 1;
 }
 a {
   margin: 0 1rem;

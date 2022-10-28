@@ -8,11 +8,24 @@
 </template>
 
 <script setup>
-import TopNavbar from "./components/TopNavbar.vue";
+import TopNavbar from "./components/UI/TopNavbar.vue";
 </script>
 
 <style>
 main {
   margin-top: 4rem;
+}
+.flex-column-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  right: 50%;
+  transform: translate(50%);
+}
+.centered {
+  position: relative;
+  right: 50%;
+  transform: translate(50%);
 }
 </style>
