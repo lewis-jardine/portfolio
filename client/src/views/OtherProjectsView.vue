@@ -8,7 +8,11 @@
     <div class="flex-column-centered">
       <h2>GitHub Projects</h2>
       <v-row>
-        <v-col cols="4" v-for="project in projects" :key="project.id">
+        <v-col
+          cols="4"
+          v-for="project in projects.slice().reverse()"
+          :key="project.id"
+        >
           <project-card :project="project"></project-card>
         </v-col>
       </v-row>
@@ -29,6 +33,7 @@ h2 {
 
 hr {
   margin: 3rem 0;
+  border-top: 2px solid white;
 }
 </style>
 
@@ -37,7 +42,7 @@ import { onMounted, ref } from "vue";
 import ProjectCard from "../components/ProjectCard.vue";
 import ProjectCarousel from "../components/ProjectCarousel";
 
-let projects = ref();
+let projects = ref([]);
 
 function getProjects() {
   fetch("https://api.github.com/users/lewis-jardine/repos")

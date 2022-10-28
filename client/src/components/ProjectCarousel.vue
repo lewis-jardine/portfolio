@@ -16,3 +16,9 @@
     ></v-carousel-item>
   </v-carousel>
 </template>
+
+<style scoped>
+div {
+  border-radius: 10px;
+}
+</style>

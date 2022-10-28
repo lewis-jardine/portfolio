@@ -5,15 +5,23 @@
       <p>to my portfolio</p>
     </div>
     <div class="flex-column-centered" id="scroll">
-      <h2>Scroll to see more</h2>
-      <v-img
-        :width="50"
-        :src="require('../assets/down-arrow.svg')"
-        alt="down arrow"
-      />
+      <a href="#key-topics">
+        <h2>Scroll to see more</h2>
+      </a>
+      <a href="#key-topics">
+        <v-img
+          :width="50"
+          :src="require('../assets/down-arrow.svg')"
+          alt="down arrow"
+        />
+      </a>
     </div>
   </div>
-  <v-parallax src="../assets/more-content-parallax.jpg" height="1000">
+  <v-parallax
+    id="key-topics"
+    src="../assets/more-content-parallax.jpg"
+    height="1000"
+  >
     <div class="flex-column-centered" id="key-topics-container">
       <h2>Key Topics I've Learnt</h2>
       <div id="key-topics-content">
@@ -57,6 +65,9 @@
 
 #scroll {
   top: 60%;
+}
+#scroll a {
+  text-decoration: none;
   color: white;
 }
 #scroll h2 {
