@@ -5,6 +5,8 @@ import httpx
 import asyncio
 import json
 
+import config
+
 app = FastAPI()
 
 origins = [
@@ -25,7 +27,7 @@ async def od_image(image):
       'https://portfolio-object-detector.cognitiveservices.azure.com/vision/v3.2/detect',
       headers = {
         'Content-Type': 'application/octet-stream',
-        'Ocp-Apim-Subscription-Key': '54ba7a81141a4bf0a35a9d18fff17ba6'
+        'Ocp-Apim-Subscription-Key': config.AZURE_API_KEY
       },
       params = {
         'model-version': 'latest'

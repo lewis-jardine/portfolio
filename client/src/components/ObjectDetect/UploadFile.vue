@@ -1,7 +1,7 @@
 <template>
   <div class="flex-column-centered">
-    <h2>Select an image to analyse</h2>
-    <div id="form-upload">
+    <h2 v-if="!loading">Select an image to analyse</h2>
+    <div v-if="!loading" id="form-upload">
       <v-file-input
         label="Upload image"
         v-model="chosenImages"
@@ -27,16 +27,21 @@
         >Upload</v-btn
       >
     </div>
+    <loading-spinner v-else></loading-spinner>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const chosenImages = ref();
-const imageObjects = ref();
+const loading = ref(false);
 
 function onUpload() {
+  loading.value = true;
   const formData = new FormData();
   formData.append("file", chosenImages.value[0]);
   fetch("http://localhost:8000/upload", {
@@ -45,8 +50,9 @@ function onUpload() {
   })
     .then((response) => response.json())
     .then((data) => {
-      imageObjects.value = data.objects;
+      store.state.imageDetections.push(data);
       console.log(data);
+      loading.value = false;
     })
     .catch((err) => console.error(err));
 }

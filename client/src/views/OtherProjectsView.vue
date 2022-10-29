@@ -7,7 +7,7 @@
     <v-divider></v-divider>
     <div class="flex-column-centered">
       <h2>GitHub Projects</h2>
-      <loading-spinner :loading="loading"></loading-spinner>
+      <loading-spinner v-if="loading"></loading-spinner>
       <v-row>
         <v-col
           cols="4"
@@ -34,8 +34,8 @@ hr {
 
 <script setup>
 import { onMounted, ref } from "vue";
-import ProjectCard from "../components/ProjectCard.vue";
-import ProjectCarousel from "../components/ProjectCarousel";
+import ProjectCard from "../components/projects/ProjectCard.vue";
+import ProjectCarousel from "../components/projects/ProjectCarousel";
 
 const projects = ref([]);
 const loading = ref(false);
