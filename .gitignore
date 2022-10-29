@@ -1,0 +1,3 @@
+# Ignore images while testing
+*.jpg
+*.png

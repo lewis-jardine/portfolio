@@ -20,7 +20,12 @@
           </template>
         </template>
       </v-file-input>
-      <v-btn append-icon="mdi-upload" @click="onUpload">Upload</v-btn>
+      <v-btn
+        :disabled="!chosenImages"
+        append-icon="mdi-upload"
+        @click="onUpload"
+        >Upload</v-btn
+      >
     </div>
   </div>
 </template>
@@ -29,6 +34,7 @@
 import { ref } from "vue";
 
 const chosenImages = ref();
+const imageObjects = ref();
 
 function onUpload() {
   const formData = new FormData();
@@ -37,7 +43,11 @@ function onUpload() {
     method: "POST",
     body: formData,
   })
-    .then((res) => console.log(res))
+    .then((response) => response.json())
+    .then((data) => {
+      imageObjects.value = data.objects;
+      console.log(data);
+    })
     .catch((err) => console.error(err));
 }
 </script>
