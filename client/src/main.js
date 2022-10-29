@@ -5,6 +5,13 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 
+import LoadingSpinner from "./components/UI/LoadingSpinner.vue";
+
 loadFonts();
 
-createApp(App).use(router).use(store).use(vuetify).mount("#app");
+createApp(App)
+  .use(router)
+  .use(store)
+  .use(vuetify)
+  .component("loading-spinner", LoadingSpinner)
+  .mount("#app");

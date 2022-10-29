@@ -24,9 +24,17 @@ main {
   right: 50%;
   transform: translate(50%);
 }
+.flex-column-centered h2 {
+  color: white;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
 .centered {
   position: relative;
   right: 50%;
   transform: translate(50%);
+}
+.v-counter {
+  color: white;
 }
 </style>

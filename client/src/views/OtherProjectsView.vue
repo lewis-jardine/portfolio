@@ -7,6 +7,7 @@
     <v-divider></v-divider>
     <div class="flex-column-centered">
       <h2>GitHub Projects</h2>
+      <loading-spinner :loading="loading"></loading-spinner>
       <v-row>
         <v-col
           cols="4"
@@ -25,12 +26,6 @@
   margin: 2rem;
 }
 
-h2 {
-  color: white;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-}
-
 hr {
   margin: 3rem 0;
   border-top: 2px solid white;
@@ -42,15 +37,17 @@ import { onMounted, ref } from "vue";
 import ProjectCard from "../components/ProjectCard.vue";
 import ProjectCarousel from "../components/ProjectCarousel";
 
-let projects = ref([]);
+const projects = ref([]);
+const loading = ref(false);
 
 function getProjects() {
+  loading.value = true;
   fetch("https://api.github.com/users/lewis-jardine/repos")
     .then((response) => response.json())
     .then((data) => {
       console.log(data.created_at);
       projects.value = data;
-      console.log(projects.value);
+      loading.value = false;
     });
 }
 

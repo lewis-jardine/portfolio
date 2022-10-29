@@ -92,7 +92,7 @@
     rgba(240, 46, 170, 0.05) 25px 25px;
 }
 #footer {
-  height: 100vh;
+  height: 30vh;
 }
 #footer a {
   text-decoration: none;
