@@ -1,11 +1,17 @@
-import uvicorn
-from fastapi import FastAPI, File, UploadFile
-from fastapi.middleware.cors import CORSMiddleware
-import httpx
-import asyncio
 import json
 
+import uvicorn
+import httpx
+from fastapi import FastAPI, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+
+import cv2
+import numpy as np
+
+from azure.storage.blob import BlobServiceClient
+
 import config
+
 
 app = FastAPI()
 
@@ -21,7 +27,7 @@ app.add_middleware(
   allow_headers=["*"]
 )
 
-async def od_image(image):
+async def post_azure_od(image):
   async with httpx.AsyncClient() as client:
     response = await client.post(
       'https://portfolio-object-detector.cognitiveservices.azure.com/vision/v3.2/detect',
@@ -37,6 +43,24 @@ async def od_image(image):
     print(response, flush=True)
     return json.loads(response.read())
 
+def bound_image(byte_image, objects):
+  # Image initaially byte string
+  for object in objects:
+    # Converted to np array
+    image = np.frombuffer(byte_image, np.uint8)
+    x, y, w, h = object["rectangle"]["x"], object["rectangle"]["y"], object["rectangle"]["w"], object["rectangle"]["h"],
+    image = cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
+    cv2.putText(image, object["object"], (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+  # Convert back to byte string
+  processed_image = image.tobytes()
+  return processed_image
+
+def upload_to_blob(image, name):
+  blob_service_client = BlobServiceClient.from_connection_string(config.STORAGE_CONNECTION_STRING)
+  blob_client = blob_service_client.get_blob_client(container='od-images', blob=name)
+  blob_client.upload_blob(image)
+
+
 @app.get("/test")
 def test():
   return {"message": "Hello World"}
@@ -45,14 +69,13 @@ def test():
 async def upload_image(file: UploadFile):
   try:
     contents = file.file.read()
-    with open(file.filename, 'wb') as f:
-      f.write(contents)
-      azure_response = await od_image(contents)
+    azure_response = await post_azure_od(contents)
+    bounded_image = bound_image(contents, azure_response['objects'])
+    upload_to_blob(bounded_image, azure_response['requestId'])
+
+    return {"response": azure_response}
   except:
     return {"message": "There was an error uploading the file"}
-  finally:
-    file.file.close()
-  return azure_response
 
 
 if __name__ == "__main__":

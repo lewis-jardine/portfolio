@@ -4,7 +4,7 @@
     <div v-if="!loading" id="form-upload">
       <v-file-input
         label="Upload image"
-        v-model="chosenImages"
+        v-model="chosenImage"
         variant="solo"
         prepend-icon="none"
         prepend-inner-icon="mdi-image"
@@ -20,10 +20,7 @@
           </template>
         </template>
       </v-file-input>
-      <v-btn
-        :disabled="!chosenImages"
-        append-icon="mdi-upload"
-        @click="onUpload"
+      <v-btn :disabled="!chosenImage" append-icon="mdi-upload" @click="onUpload"
         >Upload</v-btn
       >
     </div>
@@ -37,13 +34,13 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
-const chosenImages = ref();
+const chosenImage = ref();
 const loading = ref(false);
 
 function onUpload() {
   loading.value = true;
   const formData = new FormData();
-  formData.append("file", chosenImages.value[0]);
+  formData.append("file", chosenImage.value[0]);
   fetch("http://localhost:8000/upload", {
     method: "POST",
     body: formData,
@@ -51,10 +48,14 @@ function onUpload() {
     .then((response) => response.json())
     .then((data) => {
       store.state.imageDetections.push(data);
+      store.state.latestImage = URL.createObjectURL(chosenImage.value[0]);
       console.log(data);
       loading.value = false;
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      loading.value = false;
+      console.error(err);
+    });
 }
 </script>
 

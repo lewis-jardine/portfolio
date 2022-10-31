@@ -1,8 +1,13 @@
 <template>
-  <div class="flex-column-centered">
-    <p v-for="detection in imageDetections" :key="detection">
-      {{ detection }}
-    </p>
+  <div id="result-container">
+    <v-row>
+      <v-col cols="6">
+        <img class="responsive-img" :src="latestImage" />
+      </v-col>
+      <v-col cols="6">
+        <img class="responsive-img" :src="latestImage" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -12,5 +17,14 @@ import { computed } from "vue";
 
 const store = useStore();
 
-const imageDetections = computed(() => store.state.imageDetections);
+const latestImage = computed(() => store.state.latestImage);
+
+const latestDetection = computed(() => store.state.imageDetections);
+console.log(latestDetection);
 </script>
+
+<style scoped>
+#result-container {
+  margin: 2rem;
+}
+</style>
