@@ -1,13 +1,6 @@
 <template>
   <div id="result-container">
-    <v-row>
-      <v-col cols="6">
-        <img class="responsive-img" :src="latestImage" />
-      </v-col>
-      <v-col cols="6">
-        <img class="responsive-img" :src="latestImage" />
-      </v-col>
-    </v-row>
+    <v-img max-height="300" :src="latestDetection.url" v-if="latestDetection" />
   </div>
 </template>
 
@@ -17,10 +10,7 @@ import { computed } from "vue";
 
 const store = useStore();
 
-const latestImage = computed(() => store.state.latestImage);
-
-const latestDetection = computed(() => store.state.imageDetections);
-console.log(latestDetection);
+const latestDetection = computed(() => store.state.imageDetections[0]);
 </script>
 
 <style scoped>

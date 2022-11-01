@@ -37,9 +37,4 @@ main {
 .v-counter {
   color: white;
 }
-
-.responsive-img {
-  width: 100%;
-  height: auto;
-}
 </style>

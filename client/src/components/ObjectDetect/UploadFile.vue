@@ -47,8 +47,7 @@ function onUpload() {
   })
     .then((response) => response.json())
     .then((data) => {
-      store.state.imageDetections.push(data);
-      store.state.latestImage = URL.createObjectURL(chosenImage.value[0]);
+      store.state.imageDetections.unshift(data);
       console.log(data);
       loading.value = false;
     })
