@@ -12,14 +12,16 @@
           <v-row>
             <v-col cols="6" align-self="start">
               <v-list>
-                <v-list-item v-for="object in detection.objects" :key="object">
+                <v-list-item
+                  v-for="object in detection.objects"
+                  :key="object.object + object.confidence"
+                >
                   <template v-slot:prepend>
                     <v-chip :color="chipColour(object.confidence)">{{
                       object.confidence
                     }}</v-chip>
                   </template>
-                  {{ object.object }} : {{ object.parent.object }} :
-                  {{ object.parent.parent.object }}
+                  {{ object.object }}
                 </v-list-item>
               </v-list>
             </v-col>
