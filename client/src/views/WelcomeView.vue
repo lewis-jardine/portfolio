@@ -20,25 +20,21 @@
   <v-parallax
     id="key-topics"
     src="../assets/more-content-parallax.jpg"
-    height="1000"
+    height="1500"
   >
     <div class="flex-column-centered" id="key-topics-container">
       <h2>Key Topics I've Learnt</h2>
+      <h3>Click each topic to view supporting evidence</h3>
       <div id="key-topics-content">
-        <p>Sample text</p>
+        <topics-list></topics-list>
       </div>
     </div>
   </v-parallax>
-  <div id="footer">
-    <div class="flex-column-centered" id="footer-content">
-      <router-link to="/od">
-        <h2 class="flex-column-centered" id="footer-title">Click Here</h2>
-      </router-link>
-    </div>
-  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import TopicsList from "@/components/welcome/TopicsList.vue";
+</script>
 
 <style scoped>
 #welcome-content {
@@ -75,33 +71,22 @@
 }
 
 #key-topics-container {
-  top: 10%;
-  gap: 5rem;
+  top: 7%;
 }
-#key-topics-container h2 {
-  font-size: 2.75rem;
-  color: white;
+#key-topics-container h3 {
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-weight: 450;
 }
 #key-topics-content {
   background-color: white;
-  width: 50%;
+  width: 70%;
+  max-width: 800px;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
     rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px,
     rgba(240, 46, 170, 0.05) 25px 25px;
-}
-#footer {
-  height: 30vh;
-}
-#footer a {
-  text-decoration: none;
-  color: black;
-}
-#footer-content {
-  top: 30%;
-}
-#footer-content h2 {
-  font-size: 2rem;
 }
 </style>

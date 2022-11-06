@@ -23,12 +23,13 @@ main {
   position: relative;
   right: 50%;
   transform: translate(50%);
+  color: white;
 }
 .flex-column-centered h2 {
-  color: white;
   margin-bottom: 2rem;
   font-size: 2rem;
 }
+
 .centered {
   position: relative;
   right: 50%;
